@@ -17,10 +17,12 @@ defmodule LanguageList do
   end
 
   def count(list) do
-    Enum.count(list)
+    Kernel.length(list)
   end
 
   def functional_list?(list) do
-    Enum.any?(list, fn x -> x == "Elixir" end)
+    "Elixir" in list
   end
+
+
 end
