@@ -2,6 +2,7 @@ defmodule FoodChain do
   @doc """
   Generate consecutive verses of the song 'I Know an Old Lady Who Swallowed a Fly'.
   """
+
   @animals [
     fly: "I don't know why she swallowed the fly. Perhaps she'll die.\n",
     spider: "It wriggled and jiggled and tickled inside her.",
@@ -21,6 +22,13 @@ defmodule FoodChain do
     7 => :cow,
     8 => :horse
   }
+
+  @spec recite(start :: integer, stop :: integer) :: String.t()
+  def recite(start, stop) do
+    start..stop
+    |> Enum.map(&verse/1)
+    |> Enum.join("\n")
+  end
 
   defp verse(1) do
     """
@@ -51,6 +59,7 @@ defmodule FoodChain do
     verse = [intro | reasons]
     [verse | @animals[:fly]]
   end
+
   defp reason(:bird, :spider) do
     """
     She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.
@@ -61,13 +70,5 @@ defmodule FoodChain do
     """
     She swallowed the #{animal1} to catch the #{animal2}.
     """
-  end
-
-
-  @spec recite(start :: integer, stop :: integer) :: String.t()
-  def recite(start, stop) do
-    start..stop
-    |> Enum.map(&verse(&1))
-    |> Enum.join("\n")
   end
 end
